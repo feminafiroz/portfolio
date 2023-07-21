@@ -170,6 +170,13 @@ h6 {
     padding-left: 160px;
   }
 }
+@media (max-width: 992px) {
+  #hero {
+    height: 32vh;
+    
+    
+  }
+}
 
 #hero:before {
   content: "";
