@@ -128,7 +128,7 @@
               <div class="col-lg-6">
                 <ul>
                   <!-- <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span><a href="#" target="_blank"></a></span></li> -->
-                  <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+91 8089 579 497</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span><a href="tel:+918590809875">+91 8590 80 9875</a></span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>Kochi,Kerala</span></li>
                 </ul>
               </div>
@@ -143,6 +143,11 @@
             <p>
               I am Femina K.F from Kerala and I'm currently learning new ways of programming at Brototype maradu , kochi . I like Programming and i build interactive Websites , Age : 20
             </p>
+            <br>
+            <p>
+              <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#connectMeModal">Connect Me</a>
+            </p>
+            <div id="connect-me-message"></div>
           </div>
         </div>
 
@@ -150,7 +155,40 @@
     </section>
     <!-- End About Section -->
 
-   
+    <!-- Connect Me Modal -->
+    <div class="modal fade" id="connectMeModal" tabindex="-1" aria-labelledby="connectMeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg pt-5">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="connectMeModalLabel">Connect With Me</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="connect-me-form" method="post" role="form">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" placeholder="Your Name" id="connect-name" required>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="email" class="form-control" name="email" placeholder="Your Email" id="connect-email" required>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="subject" placeholder="Subject" id="connect-subject" required>
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="5" placeholder="Message" id="connect-message" required></textarea>
+              </div>
+              <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Send Message</button>
+                <button type="button" class="btn btn-secondary ms-2" data-bs-dismiss="modal">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <section id="skills" class="skills section-bg">
       <div class="container" data-aos="fade-up">
 
@@ -443,10 +481,10 @@
               </div>
 
               <div class="phone">
-                <a href="tel:8547 898 335">
+                <a href="tel:8590809875">
                 <i class="bi bi-phone"></i>
                 <h4>Call:</h4>
-                <p>+91 8921 081 421</p>
+                <p>+91 8590 80 9875</p>
                 </a>
               </div>
             </div>
@@ -454,7 +492,7 @@
 
           <div class="col-lg-8 mt-5 mt-lg-0 const" >
 
-            <form id="submit-form" action="" method="post" role="form" >
+            <form id="submit-form" action="thankyou.html" method="post" role="form" onsubmit="return validateForm()">
               <div class="row">
                 <div class="col-md-6 form-group">
                   <input type="text" name="name" class="form-control" placeholder="Your Name"  id="contact-name" onkeyup="validateName()" required>
@@ -475,7 +513,7 @@
               </div>
               
               <br>
-              <div class="text-center"><button class="btn text-white" type="submit" onclick="return validateForm()">Send Message</button></div>
+              <div class="text-center"><button class="btn text-white" type="submit">Send Message</button></div>
             </form>
 
           </div>
@@ -483,7 +521,9 @@
         </div>
 
       </div>
-    </section><!-- End Contact Section -->
+    </section>
+    
+    <!-- End Contact Section -->
 
   </main><!-- End #main -->
 

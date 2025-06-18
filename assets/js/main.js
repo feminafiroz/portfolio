@@ -280,9 +280,11 @@ $("#submit-form").submit((e)=>{
         data:$("#submit-form").serialize(),
         method:"post",
         success:function (response){
-            alert("Form submitted successfully")
-            window.location.reload()
-            //window.location.href="https://google.com"
+          // alert("Form submitted successfully")
+          // window.location.reload()
+            
+            // Redirect to thank you page instead of reloading
+            window.location.href = "thankyou.html"
         },
         error:function (err){
             alert("Something Error")
@@ -337,7 +339,7 @@ function validateSubject(){
 
   var subjField = document.getElementById('contact-subject').value;
 
-  var required =30;
+  var required =5;
 
   var left = required- subjField.length;
 
@@ -355,7 +357,7 @@ function validateMessage(){
 
   var msgField = document.getElementById('contact-message').value;
 
-  var required =50;
+  var required =5;
 
   var left = required- msgField.length;
 
@@ -371,10 +373,71 @@ function validateMessage(){
 }
 function validateForm()
 {
-if(!validateName() || !validatePhone() || !validateEmail()||!validateMessage()){
+if(!validateName() || !validateEmail() || !validateSubject() || !validateMessage()){
 
-    submitError.innerHTML="Please fix these error to sumbit ";
+    submitError.innerHTML="Please fix these error to submit ";
     return false;    
 }
-
+return true;
 }
+
+// Connect Me Modal Form Handler
+let messageTimeout;
+
+$("#connect-me-form").submit((e)=>{
+    e.preventDefault()
+    $.ajax({
+        url:"https://script.google.com/macros/s/AKfycbx-ke7vq96m5TIeKj0qga2nLQOdfBY5xm3LJ7Xz_5pDcSnsfqArQysOODMRcMbFjKjhwQ/exec",
+        data:$("#connect-me-form").serialize(),
+        method:"post",
+        success:function (response){
+            // Close the modal
+            $('#connectMeModal').modal('hide');
+            
+            // Clear any existing timeout
+            if (messageTimeout) {
+                clearTimeout(messageTimeout);
+            }
+            
+            // Show success message below the Connect Me button
+            $('#connect-me-message').html('<div class="alert alert-success mt-3" role="alert"><i class="bi bi-check-circle"></i> Message sent successfully! I will get back to you soon.</div>');
+            
+            // Clear the form
+            $('#connect-me-form')[0].reset();
+            
+            // Auto-hide the success message after 5 seconds
+            messageTimeout = setTimeout(function() {
+                $('#connect-me-message').fadeOut(500, function() {
+                    $(this).html('');
+                    $(this).show();
+                });
+            }, 5000);
+        },
+        error:function (err){
+            // Clear any existing timeout
+            if (messageTimeout) {
+                clearTimeout(messageTimeout);
+            }
+            
+            // Show error message below the Connect Me button
+            $('#connect-me-message').html('<div class="alert alert-danger mt-3" role="alert"><i class="bi bi-exclamation-triangle"></i> Something went wrong. Please try again.</div>');
+            
+            // Auto-hide the error message after 5 seconds
+            messageTimeout = setTimeout(function() {
+                $('#connect-me-message').fadeOut(500, function() {
+                    $(this).html('');
+                    $(this).show();
+                });
+            }, 5000);
+        }
+    })
+})
+
+// Clear messages when modal is closed manually
+$('#connectMeModal').on('hidden.bs.modal', function () {
+    // Only clear if there's no active message timeout
+    if (!messageTimeout) {
+        $('#connect-me-message').html('');
+        $('#connect-me-form')[0].reset();
+    }
+})
